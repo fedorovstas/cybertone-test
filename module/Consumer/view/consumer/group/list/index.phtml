@@ -1,0 +1,81 @@
+<h1>
+  Groups
+  <a href="<?= $this->url('consumer'); ?>">
+    <button class="btn btn-info pull-right">Show all consumers</button>
+  </a>
+</h1>
+<div class="btn-group" role="group" aria-label="Post actions">
+  <a class="btn btn-primary" href="<?= $this->url('consumer/group/add') ?>">Add new group</a>
+</div>
+<br>
+<br>
+
+<div class="list-group">
+  
+  <div class="consumers table-responsive">
+    <table class="table table-striped table-hover">
+      <tr>
+        <th>
+          <a href="<?= $this->url('consumer/group', [], [
+            'query' => [
+              'page'  => $this->params['page'],
+              'sort'  => 'groupId',
+              'order' => ($this->params['order'] == 'ASC' ? 'DESC' : 'ASC'),
+            ],
+          ]) ?>">
+            #
+            <?php if ($this->params['sort'] == 'groupId' && $this->params['order'] == 'ASC'): ?>
+              <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+            <?php elseif ($this->params['sort'] == 'groupId' && $this->params['order'] == 'DESC'): ?>
+              <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+            <?php endif; ?>
+          </a>
+        </th>
+        <th>
+          <a href="<?= $this->url('consumer/group', [], [
+            'query' => [
+              'page'  => $this->params['page'],
+              'sort'  => 'name',
+              'order' => ($this->params['order'] == 'ASC' ? 'DESC' : 'ASC'),
+            ],
+          ]) ?>">
+            name
+            <?php if ($this->params['sort'] == 'name' && $this->params['order'] == 'ASC'): ?>
+              <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+            <?php elseif ($this->params['sort'] == 'name' && $this->params['order'] == 'DESC'): ?>
+              <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+            <?php endif; ?>
+          </a>
+        </th>
+        
+        <th class="col-sm-2"></th>
+      </tr>
+      <?php foreach ($this->paginator as $group): ?>
+        <tr>
+          <td><?= $group->getGroupId() ?></td>
+          <td><?= $group->getName() ?></td>
+          <td>
+            <a class="btn btn-xs btn-primary"
+               href="<?= $this->url('consumer/group/detail', ['id' => $group->getGroupId()]) ?>">Detail</a>
+            <a class="btn btn-xs btn-default"
+               href="<?= $this->url('consumer/group/edit', ['id' => $group->getGroupId()]) ?>">Edit</a>
+            <a class="btn btn-xs btn-danger"
+               href="<?= $this->url('consumer/group/delete', ['id' => $group->getGroupId()]) ?>">Delete</a>
+          </td>
+        </tr>
+      <?php endforeach ?>
+    </table>
+  </div>
+</div>
+
+
+<?= $this->paginationControl(
+// The paginator object:
+  $this->paginator,
+  // The scrolling style:
+  'sliding',
+  // The partial to use to render the control:
+  'partial/paginator',
+  // The route to link to when a user clicks a control link:
+  ['route' => 'consumer/group', 'params' => $this->params]
+) ?>

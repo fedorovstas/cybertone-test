@@ -1,0 +1,9 @@
+<h1>Edit consumer</h1>
+
+<?php
+
+$form->setAttribute('action', $this->url('consumer/group/edit', [], TRUE));
+echo $this->partial('consumer/group/write/form', [
+  'form'        => $form,
+  'submitLabel' => 'Update group',
+]);

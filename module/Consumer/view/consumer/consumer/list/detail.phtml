@@ -1,0 +1,19 @@
+<h1>Consumer Details</h1>
+
+<dl>
+  <dt>Image</dt>
+  <dd>
+    <img src="/files/consumer/<?= $consumer->getConsumerId() ?>.<?= $consumer->getImageExtention() ?>"
+         class="img-responsive img-rounded" width="400">
+  </dd>
+  <dt>Group name</dt>
+  <dd><?= $this->escapeHtml($consumer->getGroupName()) ?></dd>
+  <dt>Login</dt>
+  <dd><?= $this->escapeHtml($consumer->getLogin()) ?></dd>
+  <dt>Email</dt>
+  <dd><?= $this->escapeHtml($consumer->getEmail()) ?></dd>
+  <dt>Expiration DateTime</dt>
+  <dd><?= $this->escapeHtml($consumer->getExpirationDateTime()) ?></dd>
+  <dt>Image ext</dt>
+  <dd><?= $this->escapeHtml($consumer->getImageExtention()) ?></dd>
+</dl>

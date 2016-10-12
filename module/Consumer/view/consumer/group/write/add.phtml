@@ -1,0 +1,9 @@
+<h1>Add consumer</h1>
+
+<?php
+
+$form->setAttribute('action', $this->url());
+echo $this->partial('consumer/group/write/form', [
+  'form'        => $form,
+  'submitLabel' => 'Add new group',
+]);

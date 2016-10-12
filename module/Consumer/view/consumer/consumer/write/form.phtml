@@ -1,0 +1,60 @@
+<?php
+
+$form = $this->form;
+$fieldset = $form->get('consumer');
+
+foreach ($this->groups as $group) {
+  $groupsArr[$group->getGroupId()] = $group->getName();
+}
+
+$groupId = $fieldset->get('groupId');
+$groupId->setValueOptions($groupsArr);
+
+$login = $fieldset->get('login');
+$password = $fieldset->get('password');
+$email = $fieldset->get('email');
+$image = $fieldset->get('image');
+
+$consumerId = $fieldset->get('consumerId');
+
+$submit = $form->get('submit');
+$submit->setValue($this->submitLabel);
+$submit->setAttribute('class', 'btn btn-primary');
+
+$form->prepare();
+
+echo $this->form()->openTag($form);
+?>
+  
+  <fieldset>
+    <div class="form-group">
+      <?= $this->formLabel($groupId) ?>
+      <?= $this->formElement($groupId) ?>
+      <?= $this->formElementErrors()->render($groupId, ['class' => 'help-block']) ?>
+    </div>
+    <div class="form-group">
+      <?= $this->formLabel($login) ?>
+      <?= $this->formElement($login) ?>
+      <?= $this->formElementErrors()->render($login, ['class' => 'help-block']) ?>
+    </div>
+    <div class="form-group">
+      <?= $this->formLabel($password) ?>
+      <?= $this->formElement($password) ?>
+      <?= $this->formElementErrors()->render($password, ['class' => 'help-block']) ?>
+    </div>
+    <div class="form-group">
+      <?= $this->formLabel($email) ?>
+      <?= $this->formElement($email) ?>
+      <?= $this->formElementErrors()->render($email, ['class' => 'help-block']) ?>
+    </div>
+    <div class="form-group">
+      <?= $this->formLabel($image) ?>
+      <?= $this->formElement($image) ?>
+      <?= $this->formElementErrors()->render($image, ['class' => 'help-block']) ?>
+    </div>
+  </fieldset>
+
+<?php
+echo $this->formSubmit($submit);
+echo $this->formHidden($consumerId);
+echo $this->form()->closeTag();

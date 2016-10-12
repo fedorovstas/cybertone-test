@@ -1,0 +1,54 @@
+<h3>Filter</h3>
+<?php
+
+$groupsArr = [0 => '---'];
+foreach ($groups as $group) {
+  $groupsArr[$group->getGroupId()] = $group->getName();
+}
+$filterForm = $this->filterForm;
+
+$groupId = $filterForm->get('groupId');
+$groupId->setValueOptions($groupsArr);
+
+$exprDateTimeFrom = $filterForm->get('expirationDateTimeFrom');
+$exprDateTimeTo = $filterForm->get('expirationDateTimeTo');
+
+$submit = $filterForm->get('submit');
+
+$filterForm->setAttribute('class', 'form');
+$filterForm->setAttribute('onsubmit',
+  'javascript: submitConsumerFilter(this, \'' . $this->url('consumer') . '\'); 
+    return false;');
+$filterForm->prepare();
+?>
+
+<?= $this->form()->openTag($filterForm); ?>
+
+<div class="form-group">
+  <?= $this->formLabel($groupId) ?>
+  <?= $this->formElement($groupId) ?>
+</div>
+
+<div class="form-group">
+  <?= $this->formLabel($exprDateTimeFrom) ?>
+  <div class='input-group date' id='datetimepickerFrom'>
+    <?= $this->formElement($exprDateTimeFrom) ?>
+    <span class="input-group-addon">
+      <span class="glyphicon glyphicon-calendar"></span>
+    </span>
+  </div>
+</div>
+
+<div class="form-group">
+  <?= $this->formLabel($exprDateTimeTo) ?>
+  <div class='input-group date' id='datetimepickerTo'>
+    <?= $this->formElement($exprDateTimeTo) ?>
+    <span class="input-group-addon">
+      <span class="glyphicon glyphicon-calendar"></span>
+    </span>
+  </div>
+</div>
+
+<?php
+echo $this->formSubmit($submit);
+echo $this->form()->closeTag();

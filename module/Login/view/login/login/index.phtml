@@ -1,0 +1,27 @@
+<?php
+
+$title = 'Вход';
+$this->headTitle($title);
+?>
+  <h1><?= $this->escapeHtml($title) ?></h1>
+<?php if (isset($this->auth_error)) { ?>
+  <p class="text-danger"><?= $this->auth_error ?></p>
+<?php }
+
+echo $this->form()->openTag($form); ?>
+  
+  <div class="form-group">
+    <?= $this->formLabel($form->get('login')) ?>
+    <?= $this->formElement($form->get('login')) ?>
+    <?= $this->formElementErrors()->render($form->get('login'), ['class' => 'help-block list-unstyled']) ?>
+  </div>
+  
+  <div class="form-group">
+    <?= $this->formLabel($form->get('password')) ?>
+    <?= $this->formElement($form->get('password')) ?>
+    <?= $this->formElementErrors()->render($form->get('password'), ['class' => 'help-block list-unstyled']) ?>
+  </div>
+
+<?php
+echo $this->formSubmit($form->get('submit'));
+echo $this->form()->closeTag();

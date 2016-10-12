@@ -1,0 +1,146 @@
+<h1>
+  Consumers
+  <a href="<?= $this->url('consumer/group'); ?>"
+     class="btn btn-info pull-right">Show all groups</a>
+</h1>
+
+<div class="row">
+  <div class="col-sm-3">
+    <?php
+    echo $this->partial('consumer/consumer/list/filter', [
+      'filterForm' => $filterForm,
+      'groups' => $groups,
+    ]);
+    ?>
+  </div>
+  <div class="col-sm-9">
+    <a class="btn btn-primary pull-right clearfix"
+       href="<?= $this->url('consumer/add') ?>">
+      Add new consumer
+    </a>
+    <br>
+    <br>
+    <div class="consumers table-responsive">
+      <table class="table table-striped table-hover">
+        <tr>
+          <th>
+            <a href="<?= $this->url('consumer', [], [
+              'query' => [
+                'page' => $params['page'],
+                'sort' => 'consumerId',
+                'order' => ($params['order'] == 'ASC' ? 'DESC' : 'ASC'),
+                'filter' => $params['filter'],
+              ],
+            ]) ?>">
+              #
+              <?php if ($params['sort'] == 'consumerId' && $params['order'] == 'ASC'): ?>
+                <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+              <?php elseif ($params['sort'] == 'consumerId' && $params['order'] == 'DESC'): ?>
+                <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+              <?php endif; ?>
+            </a>
+          </th>
+          <th>
+            <a href="<?= $this->url('consumer', [], [
+              'query' => [
+                'page' => $params['page'],
+                'sort' => 'groupName',
+                'order' => ($params['order'] == 'ASC' ? 'DESC' : 'ASC'),
+                'filter' => $params['filter'],
+              ],
+            ]) ?>">
+              group
+              <?php if ($params['sort'] == 'groupName' && $params['order'] == 'ASC'): ?>
+                <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+              <?php elseif ($params['sort'] == 'groupName' && $params['order'] == 'DESC'): ?>
+                <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+              <?php endif; ?>
+            </a>
+          </th>
+          <th>
+            <a href="<?= $this->url('consumer', [], [
+              'query' => [
+                'page' => $params['page'],
+                'sort' => 'login',
+                'order' => ($params['order'] == 'ASC' ? 'DESC' : 'ASC'),
+                'filter' => $params['filter'],
+              ],
+            ]) ?>">
+              login
+              <?php if ($params['sort'] == 'login' && $params['order'] == 'ASC'): ?>
+                <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+              <?php elseif ($params['sort'] == 'login' && $params['order'] == 'DESC'): ?>
+                <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+              <?php endif; ?>
+            </a>
+          </th>
+          <th>
+            <a href="<?= $this->url('consumer', [], [
+              'query' => [
+                'page' => $params['page'],
+                'sort' => 'email',
+                'order' => ($params['order'] == 'ASC' ? 'DESC' : 'ASC'),
+                'filter' => $params['filter'],
+              ],
+            ]) ?>">
+              email
+              <?php if ($params['sort'] == 'email' && $params['order'] == 'ASC'): ?>
+                <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+              <?php elseif ($params['sort'] == 'email' && $params['order'] == 'DESC'): ?>
+                <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+              <?php endif; ?>
+            </a>
+          </th>
+          <th>
+            <a href="<?= $this->url('consumer', [], [
+              'query' => [
+                'page' => $params['page'],
+                'sort' => 'expirationDateTime',
+                'order' => ($params['order'] == 'ASC' ? 'DESC' : 'ASC'),
+                'filter' => $params['filter'],
+              ],
+            ]) ?>">
+              expirationDateTime
+              <?php if ($params['sort'] == 'expirationDateTime' && $params['order'] == 'ASC'): ?>
+                <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+              <?php elseif ($params['sort'] == 'expirationDateTime' && $params['order'] == 'DESC'): ?>
+                <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+              <?php endif; ?>
+            </a>
+          </th>
+          <th>imageExtention</th>
+          <th></th>
+        </tr>
+        <?php foreach ($this->paginator as $consumer): ?>
+          <tr>
+            <td><?= $consumer->getConsumerId() ?></td>
+            <td><?= $consumer->getGroupName() ?></td>
+            <td><?= $consumer->getLogin() ?></td>
+            <td><?= $consumer->getEmail() ?></td>
+            <td><?= $consumer->getExpirationDateTime() ?></td>
+            <td><?= $consumer->getimageExtention() ?></td>
+            <td>
+              <a class="btn btn-xs btn-primary"
+                 href="<?= $this->url('consumer/detail', ['id' => $consumer->getConsumerId()]) ?>">Detail</a>
+              <a class="btn btn-xs btn-default"
+                 href="<?= $this->url('consumer/edit', ['id' => $consumer->getConsumerId()]) ?>">Edit</a>
+              <a class="btn btn-xs btn-danger"
+                 href="<?= $this->url('consumer/delete', ['id' => $consumer->getConsumerId()]) ?>">Delete</a>
+            </td>
+          </tr>
+        <?php endforeach ?>
+      </table>
+    </div>
+<!--    --><?//= var_dump($params); ?>
+    <?= $this->paginationControl(
+    // The paginator object:
+      $this->paginator,
+      // The scrolling style:
+      'sliding',
+      // The partial to use to render the control:
+      'partial/paginator',
+      // The route to link to when a user clicks a control link:
+      ['route' => 'consumer', 'params' => $params]
+    ) ?>
+  </div>
+</div>

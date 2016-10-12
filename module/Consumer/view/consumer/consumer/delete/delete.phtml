@@ -1,0 +1,15 @@
+<h1>Delete consumer</h1>
+
+<p>Are you sure you want to delete the following consumer?</p>
+
+<ul class="list-group">
+  <li class="list-group-item">
+    <?= $this->escapeHtml($this->consumer->getLogin()) ?>
+  </li>
+</ul>
+
+<form action="<?php $this->url('consumer/delete', [], TRUE) ?>" method="post">
+  <input type="hidden" name="id" value="<?= $this->escapeHtmlAttr($this->consumer->getConsumerId()) ?>"/>
+  <input class="btn btn-default" type="submit" name="confirm" value="Cancel"/>
+  <input class="btn btn-danger" type="submit" name="confirm" value="Delete"/>
+</form>

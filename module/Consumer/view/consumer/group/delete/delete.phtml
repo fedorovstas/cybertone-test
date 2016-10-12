@@ -1,0 +1,13 @@
+<h1>Delete consumer</h1>
+
+<p>Are you sure you want to delete the following group?</p>
+
+<ul class="list-group">
+  <li class="list-group-item"><?= $this->escapeHtml($this->group->getName()) ?></li>
+</ul>
+
+<form action="<?php $this->url('consumer/group/delete', [], TRUE) ?>" method="post">
+  <input type="hidden" name="id" value="<?= $this->escapeHtmlAttr($this->group->getGroupId()) ?>"/>
+  <input class="btn btn-default" type="submit" name="confirm" value="Cancel"/>
+  <input class="btn btn-danger" type="submit" name="confirm" value="Delete"/>
+</form>

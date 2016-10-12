@@ -1,0 +1,1 @@
+[Thu Oct 13 00:43:36.266403 2016] [:error] [pid 9959] [client 127.0.0.1:44722] PHP Fatal error:  Zend\\Router\\Exception\\RuntimeException: Route with name "" not found in /home/preacher/www/cybertone-test/vendor/zendframework/zend-view/src/Helper/Navigation/AbstractHelper.php on line 153, referer: http://cybertone-test/
